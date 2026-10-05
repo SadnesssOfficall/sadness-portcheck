@@ -1,5 +1,5 @@
 import { once } from 'node:events';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   checkPort,
   checkPorts,
@@ -45,7 +45,9 @@ describe('checkPort', () => {
     const [socket] = server.sockets;
     expect(socket).toBeDefined();
     if (socket !== undefined && !socket.destroyed) await once(socket, 'close');
-    expect(server.connections()).toBe(1);
+    await vi.waitFor(() => {
+      expect(server.connections()).toBe(1);
+    });
   });
 
   it('reports a closed port as closed with ECONNREFUSED', async () => {
@@ -197,7 +199,9 @@ describe('checkPorts', () => {
     const results = await checkPorts('127.0.0.1', ports, { concurrency: 3 });
     expect(results).toHaveLength(ports.length);
     expect(allOpen(results)).toBe(true);
-    expect(server.connections()).toBe(ports.length);
+    await vi.waitFor(() => {
+      expect(server.connections()).toBe(ports.length);
+    });
   });
 
   it('accepts a concurrency larger than the number of ports', async () => {
