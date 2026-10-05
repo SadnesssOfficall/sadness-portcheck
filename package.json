@@ -1,0 +1,64 @@
+{
+  "name": "sadness-portcheck",
+  "version": "0.1.0",
+  "description": "Check whether TCP ports are open from the CLI or from code. Ranges, concurrency limit, IPv4/IPv6, JSON output, zero runtime dependencies.",
+  "keywords": [
+    "port",
+    "tcp",
+    "portcheck",
+    "port-scanner",
+    "network",
+    "cli",
+    "ipv6",
+    "healthcheck"
+  ],
+  "license": "MIT",
+  "author": "Sadness",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "sadness-portcheck": "dist/cli/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SadnesssOfficall/sadness-portcheck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SadnesssOfficall/sadness-portcheck/issues"
+  },
+  "homepage": "https://github.com/SadnesssOfficall/sadness-portcheck#readme",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "prepublishOnly": "npm run lint && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.4",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^4.1.11"
+  }
+}
